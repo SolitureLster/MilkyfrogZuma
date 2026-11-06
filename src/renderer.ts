@@ -3,7 +3,8 @@ import { Node, ChainedBall, Game, Point, Explosion } from "./types";
 import { add, scale, subtract, toUnit } from "./util";
 
 const milkyFrogImage = new Image();
-milkyFrogImage.src = "/tsuma/image/milkyfrog.jpg";
+// 用 BASE_URL 拼接：本地与 GitHub Pages 子路径（/MilkyfrogZuma/）都能正确加载
+milkyFrogImage.src = `${import.meta.env.BASE_URL}image/milkyfrog.jpg`;
 
 export interface RenderOptions {
   scale: number,
@@ -64,7 +65,7 @@ export const renderGame = (canvas: HTMLCanvasElement) => (game: Game, options: R
 const renderMapEditorBackground = (context: CanvasRenderingContext2D, game: Game) => {
   if(!game.debug.enableMapEditMode) return;
 
-  const imageSrc = '/tsuma/mapEditorBackground.png';
+  const imageSrc = `${import.meta.env.BASE_URL}mapEditorBackground.png`;
   const image = new Image();
   image.src = imageSrc;
   context.drawImage(image, 0, 0);

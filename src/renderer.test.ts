@@ -1,4 +1,21 @@
 import { describe, it, expect, vi } from 'vitest';
+
+// Node 环境没有 DOM 的 Image，而 renderer 模块在导入时就会 new Image()。
+// vi.hoisted 先于 import 执行，这里补一个最小占位实现。
+vi.hoisted(() => {
+  if (typeof globalThis.Image === 'undefined') {
+    Object.defineProperty(globalThis, 'Image', {
+      configurable: true,
+      writable: true,
+      value: class {
+        src = '';
+        complete = false;
+        naturalWidth = 0;
+      },
+    });
+  }
+});
+
 import { renderGame, RenderOptions } from './renderer';
 import { Game, Board, BoardName } from './types';
 
@@ -52,6 +69,10 @@ describe('renderer', () => {
         fillText: vi.fn(),
         strokeText: vi.fn(),
         drawImage: vi.fn(),
+        save: vi.fn(),
+        restore: vi.fn(),
+        translate: vi.fn(),
+        rotate: vi.fn(),
         set scaledFontSize(_: number) {},
         lineWidth: 1,
         lineCap: 'butt',

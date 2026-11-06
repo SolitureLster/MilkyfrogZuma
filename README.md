@@ -1,11 +1,13 @@
 # Tsuma Demo · 祖玛类消除游戏（课程作业演示原型）
 
+**▶ 在线试玩：<https://soliturelster.github.io/MilkyfrogZuma/>**（桌面浏览器打开）
+
 > ## ⚠️ 降级声明
 >
 > 本仓库是**软件工程课程小组作业的演示原型**，基于开源项目
 > [jamiely/tsuma](https://github.com/jamiely/tsuma) 改造而来，**不是完整版游戏**。
 >
-> - **本软件仅用于课程小组演示与学习交流**，不用于商业用途，不对外发布或分发。
+> - **本软件仅用于课程小组演示与学习交流**，不用于商业用途；代码公开仅供学习参考。
 > - 演示版**只锁定一个关卡**（`board11`），不提供关卡选择、解锁与进度存档。
 > - 下文"已实现"一节之外的能力（多关卡流程、选关界面、移动端适配、排行榜等）
 >   均为**延期项**，不作为本版本的验收依据。
@@ -44,9 +46,16 @@ pnpm install
 pnpm dev
 ```
 
-- 开发地址：<http://localhost:5173/tsuma/>（`vite.config.ts` 的 `base` 为 `/tsuma`，路径不能省）
+- 开发地址：<http://localhost:5173/MilkyfrogZuma/>（`vite.config.ts` 的 `base` 为 `/MilkyfrogZuma/`，路径不能省）
 - 构建：`pnpm build`
 - 测试：`pnpm test`
+
+### 2.1 部署（GitHub Pages）
+
+推送到 `main` 后，`.github/workflows/deploy.yml` 会自动执行「安装 → 测试 → 构建 → 发布」，
+站点地址：<https://soliturelster.github.io/MilkyfrogZuma/>。
+
+首次启用需要在仓库 **Settings → Pages** 中把 Source 设为 **GitHub Actions**。
 
 ## 3. 玩法
 
@@ -122,13 +131,13 @@ zuma-demo/
 
 | 问题 | 说明 |
 |---|---|
-| `renderer.test.ts` 在 node 环境失败 | 渲染模块在导入时执行 `new Image()`，上游未配置 jsdom；属**上游遗留**，与本次改造无关 |
-| 构建资源路径 | `vite.config.ts` 的 `base` 固定为 `/tsuma`，部署到根路径需改配置 |
-| 上游球链边界 bug | 见 `TODO.md` 第 7、11 条，本次未处理 |
+| 仅支持桌面鼠标 | 触屏与移动端未适配，见延期项 |
+| 上游球链边界 bug | 见 `TODO.md` 第 4、8 条，本次未处理 |
+| 部署路径绑定 | `base` 固定为 `/MilkyfrogZuma/`，换仓库名部署需同步修改 `vite.config.ts` |
 
 ## 8. 来源与许可
 
 本项目基于 [jamiely/tsuma](https://github.com/jamiely/tsuma) 改造，原始作者 jamiely。
 上游快照中**未包含 LICENSE 文件**。**本软件仅用于课程小组演示与学习交流**，
-不用于商业用途、不对外发布或分发。
+不用于商业用途；代码公开仅供学习参考。
 详细归属、修改范围与第三方资源见 [`ATTRIBUTION.md`](ATTRIBUTION.md)。

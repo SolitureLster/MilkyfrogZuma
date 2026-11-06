@@ -2,7 +2,8 @@ import { defineConfig } from "vite";
 import path from "path";
 
 export default defineConfig({
-  base: "/tsuma",
+  // GitHub Pages 项目站点地址是 /MilkyfrogZuma/，本地开发也走同一路径，避免两套配置
+  base: "/MilkyfrogZuma/",
   build: {
     rollupOptions: {
       external: ['sfxr'],
